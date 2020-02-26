@@ -10,10 +10,12 @@ import UIKit
 
 class Questions {
     
+    
+    
     var questions = [QuestionObject]()
         
     init() {
-        let q1 = QuestionObject(question: "How old is Lois?" , answer: 6)
+        let q1 = QuestionObject(question: "How many years did the WW1 last?" , answer: 4)
             questions.append(q1)
         
         let q2 = QuestionObject(question: "Zlatans number in Barcelona?", answer: 9)
@@ -91,6 +93,13 @@ class Questions {
         let q26 = QuestionObject(question: "Counterstrike wingman team players?", answer: 2)
         questions.append(q26)
         
-        
+        shuffleArray ()
     }
+    
+    func shuffleArray () {
+        questions.shuffle()
+    }
+    
+    
+    
 }

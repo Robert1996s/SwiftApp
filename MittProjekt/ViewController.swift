@@ -29,6 +29,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     var players = [Player]()
     let cellId = "cellId"
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,9 +48,10 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     @IBAction func playbuttonPressed(_ sender: Any) {
         self.performSegue(withIdentifier: "playviewSegue", sender: self)
-//        if (players.count == 0) {
-//            tableView.reloadData()
-//        }
+        if (players.count == 0) {
+            print("no")
+            //noplayersAlert()
+        }
     }
     
     
@@ -92,6 +94,15 @@ class ViewController: UIViewController, UITableViewDataSource {
             }
         }
     }
+    
+    
+    func noplayersAlert (title: String, message: String) {
+        let alert = UIAlertController(title: "No players!", message: "You need to add players before starting the game.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+            self.present(alert, animated: true, completion: nil)
+        
+        }
     
     
     

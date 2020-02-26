@@ -37,8 +37,6 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         self.pickerView.dataSource = self
         currentQuestion = questions.questions[currentQuestionPos]
         questionText.text = currentQuestion.question
-        print(currentQuestion.question)
-        print(players?[currentplayerIndex].name)
         playerTurn.text = (players?[currentplayerIndex].name)
     }
     
@@ -60,34 +58,37 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
          return  pickerData[row]
     }
     
-    func updateUi() {
-        playerPoints.text = "Points: \(score)"
-        
-    }
     
-     func loadnextQuestion () {
-        if(currentQuestionPos < questions.questions.count) {
-            currentQuestionPos += 1
+    func updateUi() {
+        if let scores = players?.map({ "\($0.score)" }) {
+            playerPoints.text = "Points: \(scores.joined(separator: ", "))"
             
-            if currentplayerIndex < players!.count - 2 {
-                currentplayerIndex += 1
-            } else {
-                currentplayerIndex == 0
-            }
-            playerTurn.text = (players?[currentplayerIndex].name)
-            currentQuestion = questions.questions[currentQuestionPos]
-            questionText.text = currentQuestion.question
         }
     }
     
-
+     func loadnextQuestion () {
+            if(currentQuestionPos < questions.questions.count) {
+            currentQuestionPos += 1
+            
+            if currentplayerIndex < players!.count - 1 {
+                currentplayerIndex += 1
+            } else {
+                currentplayerIndex = 0
+            }
+                playerTurn.text = (players?[currentplayerIndex].name)
+                currentQuestion = questions.questions[currentQuestionPos]
+                questionText.text = currentQuestion.question
+        }
+    }
+    
     
     @IBAction func submitButtonPressed(_ sender: UIButton) {
         let i = pickerView.selectedRow(inComponent: 0)
         if(currentQuestion.answer == i) {
-            score += 1
-            loadnextQuestion()
+            players?[currentplayerIndex].score += 1
             updateUi()
+            checkWinner ()
+            loadnextQuestion()
         } else {
             updateUi()
             loadnextQuestion()
@@ -95,11 +96,23 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     
-//
-//    func checkWinner () {
-//        //if(player.score == 5) {
-//        //UIAlertAction
-//        // }
-//    }
+    func checkWinner () {
+        if(players?[currentplayerIndex].score == 5) {
+            print("winner")
+            winnerAlert(title: "Winner", message: "You are a Winner")
+         }
+    }
+    
+    func winnerAlert (title:String, message: String) {
+        let alert = UIAlertController(title: "Winner!", message:  "The winner is:  \(String(describing: (players?[currentplayerIndex].name)))", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Restart game", style:UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func currentplayerScore () {
+        
+    }
+    
     
 }
