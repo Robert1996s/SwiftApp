@@ -1,22 +1,6 @@
-//
-//  ViewController.swift
-//  MittProjekt
-//
-//  Created by Robert Sundin on 2020-01-20.
-//  Copyright © 2020 Robert Sundin. All rights reserved.
-//
+
 
 import UIKit
-
-extension UIViewController {
-    func HideKeyBoard() {
-        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    @objc func DismissKeyboard() {
-        view.endEditing(true)
-    }
-}
 
 
 
@@ -36,9 +20,13 @@ class ViewController: UIViewController, UITableViewDataSource {
         let nib  = UINib(nibName: "TableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
-        self.HideKeyBoard()
-        
+        HideKeyBoard()
    }
+    
+    func HideKeyBoard() {
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
+    }
     
     
     @IBAction func howToPlay(_ sender: UIButton) {
@@ -47,10 +35,11 @@ class ViewController: UIViewController, UITableViewDataSource {
     
 
     @IBAction func playbuttonPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: "playviewSegue", sender: self)
         if (players.count == 0) {
             print("no")
-            //noplayersAlert()
+            noplayersAlert(title: "No players!", message: "Add players!")
+        } else {
+            self.performSegue(withIdentifier: "playviewSegue", sender: self)
         }
     }
     
@@ -79,6 +68,12 @@ class ViewController: UIViewController, UITableViewDataSource {
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TableViewCell
+//    if editingStyle == .delete {
+//       print("Deleted")
+//       self.players.remove(at: indexPath.row)
+//       self.tableView.beginUpdates()
+//       self.tableView.deleteRows(at: [indexPath], with: .automatic)
+//       self.tableView.endUpdates()
     
     
         cell.labelblabla.text = players[indexPath.row].name
@@ -103,8 +98,6 @@ class ViewController: UIViewController, UITableViewDataSource {
             self.present(alert, animated: true, completion: nil)
         
         }
-    
-    
-    
+
     
 }

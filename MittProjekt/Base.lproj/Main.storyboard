@@ -114,6 +114,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="wAo-gJ-nNU"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="9Mc-b7-jEb"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ql-sF-hIK">
                                 <rect key="frame" x="20" y="96" width="75" height="25"/>
@@ -270,6 +274,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kWj-fB-jRN"/>
+        <segue reference="g9i-fD-vRX"/>
     </inferredMetricsTieBreakers>
 </document>

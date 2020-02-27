@@ -1,10 +1,4 @@
-//
-//  Questions.swift
-//  MittProjekt
-//
-//  Created by Robert Sundin on 2020-01-23.
-//  Copyright © 2020 Robert Sundin. All rights reserved.
-//
+
 
 import UIKit
 
@@ -23,6 +17,7 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     var questions = Questions()
     var score = 0
     var currentQuestionPos = 0
+    var questionCount = 0
     
     
     var pickerData: [String] =  ["", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
@@ -38,6 +33,7 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         currentQuestion = questions.questions[currentQuestionPos]
         questionText.text = currentQuestion.question
         playerTurn.text = (players?[currentplayerIndex].name)
+
     }
     
     
@@ -62,6 +58,7 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     func updateUi() {
         if let scores = players?.map({ "\($0.score)" }) {
             playerPoints.text = "Points: \(scores.joined(separator: ", "))"
+            noQuestions ()
             
         }
     }
@@ -84,6 +81,7 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     @IBAction func submitButtonPressed(_ sender: UIButton) {
         let i = pickerView.selectedRow(inComponent: 0)
+        questionCount += 1
         if(currentQuestion.answer == i) {
             players?[currentplayerIndex].score += 1
             updateUi()
@@ -100,19 +98,47 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         if(players?[currentplayerIndex].score == 5) {
             print("winner")
             winnerAlert(title: "Winner", message: "You are a Winner")
+            
+            
          }
     }
     
+    
     func winnerAlert (title:String, message: String) {
-        let alert = UIAlertController(title: "Winner!", message:  "The winner is:  \(String(describing: (players?[currentplayerIndex].name)))", preferredStyle: UIAlertController.Style.alert)
+        guard let name = players?[currentplayerIndex].name else{return}
+        
+        let alert = UIAlertController(title: "Winner!", message:  "The winner is:  \(name)", preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: "Restart game", style:UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+
     }
     
-    func currentplayerScore () {
+    
+    
+    func noQuestions () {
+        if (questionCount >= 2) {
+            questionsAlert(title: "No questions", message: "No more questions")
+            
+        }
+    }
+    
+    func questionsAlert (title:String, message: String) {
+        
+        let alert = UIAlertController(title: "End Game", message:  "No more questions", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "End game", style: UIAlertAction.Style.default, handler: { action -> Void in
+            self.performSegue(withIdentifier: "backhomeSegue", sender: self)
+        }))
+        self.present(alert, animated: true, completion: nil)
         
     }
     
-    
 }
+
+
+
+// Bra slut på question array, alert och sedan börja om?
+
+//action på alert
+//alert dialog
