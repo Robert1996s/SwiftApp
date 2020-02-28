@@ -36,7 +36,6 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     @IBAction func playbuttonPressed(_ sender: Any) {
         if (players.count == 0) {
-            print("no")
             noplayersAlert(title: "No players!", message: "Add players!")
         } else {
             self.performSegue(withIdentifier: "playviewSegue", sender: self)
@@ -55,27 +54,16 @@ class ViewController: UIViewController, UITableViewDataSource {
             tableView.reloadData()
             
         }
-        print(players.count)
     }
     
     
     
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return players.count
-        
    }
 
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TableViewCell
-//    if editingStyle == .delete {
-//       print("Deleted")
-//       self.players.remove(at: indexPath.row)
-//       self.tableView.beginUpdates()
-//       self.tableView.deleteRows(at: [indexPath], with: .automatic)
-//       self.tableView.endUpdates()
-    
-    
         cell.labelblabla.text = players[indexPath.row].name
         cell.backgroundColor = UIColor.clear
         

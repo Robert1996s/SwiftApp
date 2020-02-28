@@ -107,9 +107,11 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     func winnerAlert (title:String, message: String) {
         guard let name = players?[currentplayerIndex].name else{return}
         
-        let alert = UIAlertController(title: "Winner!", message:  "The winner is:  \(name)", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Congratulations!", message:  "The winner is:  \(name)", preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction(title: "Restart game", style:UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Exit Game", style:UIAlertAction.Style.default, handler: { action -> Void in
+            self.performSegue(withIdentifier: "backhomeSegue", sender: self)
+        }))
         self.present(alert, animated: true, completion: nil)
 
     }
@@ -117,11 +119,12 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     
     func noQuestions () {
-        if (questionCount >= 2) {
-            questionsAlert(title: "No questions", message: "No more questions")
+        if (questionCount >= 25) {
+            questionsAlert(title: "Game has ended", message: "No more questions")
             
         }
     }
+    
     
     func questionsAlert (title:String, message: String) {
         
@@ -133,6 +136,7 @@ class QuestionView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         self.present(alert, animated: true, completion: nil)
         
     }
+    
     
 }
 

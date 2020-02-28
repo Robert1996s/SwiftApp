@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="height" constant="291" id="1Iw-MP-lFB"/>
                                     <constraint firstAttribute="width" constant="239" id="P89-qy-Ybe"/>
                                 </constraints>
-                                <string key="text">1-8 players, first player to 5 points win the game! The answers is always between 1-10. You can make it a drinking game if you take equal sips for the amount of numbers off your guess is :) Good luck! </string>
+                                <string key="text">1-8 players, first player to 5 points win the game! You get to answer one question at a time. The answers is always between 1 and 10. Good luck!</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -188,9 +188,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOQ-Hm-TR9">
-                                <rect key="frame" x="30" y="20" width="50" height="40"/>
+                                <rect key="frame" x="30" y="20" width="37" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="Back">
+                                <state key="normal" title="Exit">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
